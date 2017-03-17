@@ -1,0 +1,195 @@
+﻿using Bytes2you.Validation;
+using NewsLetter.Data.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NewsLetter.Data.Repositories
+{
+    public class EfGenericRepository<T> : IEfGenericRepository<T> where T : class
+    {
+        public EfGenericRepository(DbContext context)
+        {
+            Guard.WhenArgument(context, nameof(DbContext)).IsNull().Throw();
+
+            this.Context = context;
+            this.DbSet = this.Context.Set<T>();
+        }
+
+        protected DbContext Context { get; private set; }
+
+        protected DbSet<T> DbSet { get; private set; }
+
+        public IQueryable<T> All
+        {
+            get
+            {
+                return this.DbSet;
+            }
+        }
+
+        public void Add(T entity)
+        {
+            var entry = this.Context.Entry(entity);
+            entry.State = EntityState.Added;
+        }
+
+        public void AddOrUpdate(T entity)
+        {
+            this.Context.Set<T>().AddOrUpdate(entity);
+        }
+
+        public void Delete(T entity)
+        {
+            var entry = this.Context.Entry(entity);
+            entry.State = EntityState.Deleted;
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            return this.DbSet.ToList();
+        }
+
+        public IEnumerable<T1> GetAll<T1>(
+            Expression<Func<T, bool>> filter,
+            Expression<Func<T, T1>> project)
+        {
+            IQueryable<T> result = this.DbSet;
+
+            if (filter != null)
+            {
+                result = result.Where(filter);
+            }
+
+            if (project != null)
+            {
+                return result.Select(project).ToList();
+            }
+            else
+            {
+                return result.OfType<T1>().ToList();
+            }
+        }
+
+        public IEnumerable<T1> GetAll<T1>(
+            Expression<Func<T, bool>> filter,
+            Expression<Func<T, T1>> project,
+            params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> result = this.DbSet;
+
+            if (includes != null)
+            {
+                result = includes.Aggregate(result, (current, include) => current.Include(include));
+            }
+
+            if (filter != null)
+            {
+                result = result.Where(filter);
+            }
+
+            if (project != null)
+            {
+                return result.Select(project).ToList();
+            }
+            else
+            {
+                return result.OfType<T1>().ToList();
+            }
+        }
+
+        public IEnumerable<T2> GetAll<T1, T2>(
+          Expression<Func<T, bool>> filter,
+          Expression<Func<T, T1>> sort,
+          Expression<Func<T, T2>> project)
+        {
+            IQueryable<T> result = this.DbSet;
+
+            if (filter != null)
+            {
+                result = result.Where(filter);
+            }
+
+            if (sort != null)
+            {
+                result = result.OrderBy(sort);
+            }
+
+            if (project != null)
+            {
+                return result.Select(project).ToList();
+            }
+            else
+            {
+                return result.OfType<T2>().ToList();
+            }
+        }
+
+        public IEnumerable<T2> GetAll<T1, T2>(
+            Expression<Func<T, bool>> filter,
+            Expression<Func<T, T1>> sort,
+            Expression<Func<T, T2>> project,
+            params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> result = this.DbSet;
+
+            if (includes != null)
+            {
+                result = includes.Aggregate(result, (current, include) => current.Include(include));
+            }
+
+            if (filter != null)
+            {
+                result = result.Where(filter);
+            }
+
+            if (sort != null)
+            {
+                result = result.OrderBy(sort);
+            }
+
+            if (project != null)
+            {
+                return result.Select(project).ToList();
+            }
+            else
+            {
+                return result.OfType<T2>().ToList();
+            }
+        }
+
+        public T GetById(object id)
+        {
+            return this.DbSet.Find(id);
+        }
+
+        public void Update(T entity)
+        {
+            var entry = this.Context.Entry(entity);
+            entry.State = EntityState.Modified;
+        }
+
+        public T GetFirst(Expression<Func<T, bool>> filterExpression)
+        {
+            var foundEntity = this.DbSet.FirstOrDefault(filterExpression);
+            return foundEntity;
+        }
+
+        public T GetFirst(Expression<Func<T, bool>> filterExpression, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> result = this.DbSet;
+
+            if (includes != null)
+            {
+                result = includes.Aggregate(result, (current, include) => current.Include(include));
+            }
+
+            return result.OfType<T>().FirstOrDefault(filterExpression);
+        }
+    }
+}

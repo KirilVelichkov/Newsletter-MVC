@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta property="og:description" content="News Letter" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NewsLetter</title>
+    @Styles.Render("~/Content/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-holder">
+            <a href="#"><img src="../../Images/Static/logo.png" /></a>
+        </div>
+        <nav class="navbar navbar-toggleable-lg navbar-light bg-faded">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link nav-link-active" href="#">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("ENTERTAINMENT", "Neshto", "Category", new { category = "entertainment", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
+                        @*<a class="nav-link" href="#/home/category/?category=ENTERTAINMENT&pageNumber=1&pageSize=5">ENTERTAINMENT</a>*@
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("SPORT", "Neshto", "Category", new { category = "sport", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/home/category/?category=POLITICS&pageNumber=1&pageSize=5">POLITICS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/home/category/?category=HEALTH&pageNumber=1&pageSize=5">HEALTH</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/home/category/?category=TECHNOLOGY&pageNumber=1&pageSize=5">TECHNOLOGY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-profile hidden" href="#/profile">MY PROFILE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-user-control" href="#/register">REGISTER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-user-control" href="#/login">LOGIN</a>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("ADMIN", "Index", "Admin", null, new { @class = "nav-link" })
+                        @*<a class="nav-link nav-link-admin hidden" href="#/admin">ADMIN</a>*@
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hidden" href="#" id="logout">LOGOUT</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="search-box mr-sm-2" id="search-box" type="text" placeholder="Search this website...">
+                </form>
+            </div>
+        </nav>
+    </header>
+
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>*@
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
+</body>
+</html>
