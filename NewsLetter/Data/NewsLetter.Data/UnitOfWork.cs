@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NewsLetter.Data
 {
-    public class UnitOfWork :IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly DbContext context;
 

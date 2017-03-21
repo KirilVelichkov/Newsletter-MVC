@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Bytes2you.Validation;
+using NewsLetter.Services.Data.Contracts;
+using NewsLetter.Services.Providers.Contracts;
+using NewsLetter.ViewModels.Articles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +12,26 @@ namespace NewsLetter.MVC.Controllers
 {
     public class CategoryController : Controller
     {
-        public ActionResult Neshto(string category)
-        {
+        private readonly ICategoryService categoryService;
 
-            return View();
+        public CategoryController(ICategoryService categoryService)
+        {
+            Guard.WhenArgument(categoryService, nameof(categoryService)).IsNull().Throw();
+
+            this.categoryService = categoryService;
+        }
+
+        public ActionResult Index(string category)
+        {
+            var articlesByCategory = this.categoryService.GetArticleByCategory(category);
+
+            var ArticlesByCategoryViewModel = new ArticleAndCategoryViewModel()
+            {
+                ArticlesByCategory = articlesByCategory,
+                CategoryName = category
+            };
+
+            return View(ArticlesByCategoryViewModel);
         }
     }
 }

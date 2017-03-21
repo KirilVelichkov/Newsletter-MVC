@@ -27,6 +27,8 @@ namespace NewsLetter.Models.DbModels
         [ForeignKey("User")]
         public string UserId { get; set; }
 
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+
         public virtual User User { get; set; }
 
         public virtual ICollection<CommentReply> Replies

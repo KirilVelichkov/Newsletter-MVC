@@ -12,6 +12,7 @@ namespace NewsLetter.Models.DbModels
     { 
         private ICollection<Tag> tags;
         private ICollection<Comment> comments;
+
         public Article()
         {
             this.tags = new HashSet<Tag>();
@@ -33,6 +34,8 @@ namespace NewsLetter.Models.DbModels
         public int CategoryId { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
         public virtual Category Category { get; set; }
 

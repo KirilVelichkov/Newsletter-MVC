@@ -36,9 +36,9 @@ namespace NewsLetter.Auth.Identity.Services
             this.authManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
 
-        public async Task<SignInStatus> LogIn(string email, string password)
+        public  SignInStatus LogIn(string email, string password)
         {
-            SignInStatus result = await this.signInManager.PasswordSignInAsync(email, password, isPersistent: false, shouldLockout: false);
+            SignInStatus result =  this.signInManager.PasswordSignIn(email, password, isPersistent: false, shouldLockout: false);
 
             return result;
         }

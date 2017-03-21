@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewsLetter.Models.DbModels
@@ -9,6 +10,8 @@ namespace NewsLetter.Models.DbModels
 
         [Required]
         public string Content { get; set; }
+
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
         [ForeignKey("User")]
         public string UserId { get; set; }

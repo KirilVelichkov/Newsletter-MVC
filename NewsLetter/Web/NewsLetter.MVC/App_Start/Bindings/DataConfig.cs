@@ -19,7 +19,7 @@ namespace NewsLetter.MVC.App_Start.Bindings
         {
             this.Bind<DbContext>().To<NewsLetterDBContext>().InRequestScope();
             this.Bind(typeof(IEfGenericRepository<>)).To(typeof(EfGenericRepository<>)).InRequestScope();
-            //this.Bind(typeof(IProjectableRepositoryEf<>)).To(typeof(ProjectableRepositoryEf<>)).InRequestScope();
+            this.Bind(typeof(IEfMappingRepository<>)).To(typeof(EfMappingRepository<>)).InRequestScope();
             this.Bind<Func<IUnitOfWork>>().ToMethod(ctx => () => ctx.Kernel.Get<UnitOfWork>()).InRequestScope();
         }
     }

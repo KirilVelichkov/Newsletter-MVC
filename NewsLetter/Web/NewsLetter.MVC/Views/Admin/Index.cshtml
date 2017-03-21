@@ -1,1 +1,47 @@
-﻿
+﻿@model CreateArticleViewModel
+
+<div class="row admin-panel-container">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs tabs">
+            <li class="nav-item">
+                <button class="nav-link tab tab-active">CREATE ARTICLE</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link tab">ALL ARTICLES</button>
+            </li>
+        </ul>
+
+
+        @using (Html.BeginForm(nameof(AdminController.CreateArticle), "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "create-article-form", @class = "tab-content admin-custom-form" }))
+        {
+            @Html.AntiForgeryToken();
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Title)
+                @Html.TextBoxFor(x => x.Title, new { @class = "custom-form-item ml-15" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Content)
+                @Html.TextAreaFor(x => x.Content, new { @class = "custom-form-item ml-15", rows = 4 })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.TagNames)
+                @Html.TextBoxFor(x => x.TagNames, new { @class = "custom-form-item ml-15" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.CategoryId)
+                @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.Categories, "Id", "Name"), new { @class = "custom-form-item  ml-15" })
+            </div>
+
+            <label for="image" class="btn btn-custom ml-15">IMAGE</label>
+            <input type="file" name="ArticleImage" id="image" required>
+            <input type="submit" class="btn btn-success btn-submit-form" value="CREATE">
+        }
+
+        <div class="tab-content all-articles-container hidden" id="articles">
+        </div>
+    </div>
+</div>

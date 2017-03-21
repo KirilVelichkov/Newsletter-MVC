@@ -5,8 +5,7 @@
     <meta property="og:description" content="News Letter" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>NewsLetter</title>
-    @Styles.Render("~/Content/css")
-    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.Render("~/bundles/modernizr")
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
           crossorigin="anonymous">
@@ -15,6 +14,7 @@
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
+    @Styles.Render("~/Content/css")
 </head>
 <body>
     <header>
@@ -29,40 +29,50 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link nav-link-active" href="#">HOME</a>
+                        <a class="nav-link nav-link-active" href="home?pageNumber=1&pageSize=5">HOME</a>
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("ENTERTAINMENT", "Neshto", "Category", new { category = "entertainment", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
-                        @*<a class="nav-link" href="#/home/category/?category=ENTERTAINMENT&pageNumber=1&pageSize=5">ENTERTAINMENT</a>*@
+                        @Html.ActionLink("ENTERTAINMENT", nameof(CategoryController.Index), "Category", new { category = "entertainment", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("SPORT", "Neshto", "Category", new { category = "sport", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
+                        @Html.ActionLink("SPORT", nameof(CategoryController.Index), "Category", new { category = "sport", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#/home/category/?category=POLITICS&pageNumber=1&pageSize=5">POLITICS</a>
+                        @Html.ActionLink("POLITICS", nameof(CategoryController.Index), "Category", new { category = "politics", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#/home/category/?category=HEALTH&pageNumber=1&pageSize=5">HEALTH</a>
+                        @Html.ActionLink("HEALTH", nameof(CategoryController.Index), "Category", new { category = "health", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#/home/category/?category=TECHNOLOGY&pageNumber=1&pageSize=5">TECHNOLOGY</a>
+                        @Html.ActionLink("TECHNOLOGY", nameof(CategoryController.Index), "Category", new { category = "technology", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-profile hidden" href="#/profile">MY PROFILE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-user-control" href="#/register">REGISTER</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-user-control" href="#/login">LOGIN</a>
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("ADMIN", "Index", "Admin", null, new { @class = "nav-link" })
-                        @*<a class="nav-link nav-link-admin hidden" href="#/admin">ADMIN</a>*@
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link hidden" href="#" id="logout">LOGOUT</a>
-                    </li>
+                    @if (!this.User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("REGISTER", nameof(AccountController.Register), "Account", "", new { @class = "nav-link nav-link-user-control" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("LOGIN", nameof(AccountController.Login), "Account", "", new { @class = "nav-link nav-link-user-control" })
+                        </li>
+                    }
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("ADMIN", "Index", "Admin", null, new { @class = "nav-link" })
+                        </li>
+                    }
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">LOGOUT</a>
+                            </li>
+                        }
+
+                    }
+
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="search-box mr-sm-2" id="search-box" type="text" placeholder="Search this website...">
@@ -71,37 +81,16 @@
         </nav>
     </header>
 
-
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
-        </div>*@
-    <div class="container body-content">
+    <main id="content">
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
-    </div>
+    </main>
 
     @*@Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)*@
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
 </body>
 </html>

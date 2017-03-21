@@ -14,7 +14,7 @@ namespace NewsLetter.Auth.Identity.Contracts
     {
         void LogOff();
 
-        Task<SignInStatus> LogIn(string email, string password);
+        SignInStatus LogIn(string email, string password);
 
         Task<IdentityResult> Register(User user, string password);
 
