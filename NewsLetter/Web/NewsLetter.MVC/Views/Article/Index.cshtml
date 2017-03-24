@@ -14,11 +14,11 @@
             <div class="da-image-container">
 
                 <div class="da-category">
-                    @Model.Category
+                    @Model.Category.ToUpper()
                 </div>
                 <img class="da-image" src="@Model.ImageUrl">
                 <div class="da-date">
-                    <span>@Model.CreatedOn.ToString("MMMM")</span>
+                    <span>@Model.CreatedOn.ToString("MMM").Substring(0, 3).ToUpper()</span>
                     <span>@Model.CreatedOn.Day</span>
                 </div>
 
@@ -76,7 +76,7 @@
             </div>
 
             <div class="da-content">
-               @Model.Content
+                @Model.Content
             </div>
 
         </div>
@@ -85,75 +85,19 @@
 
 <div class="row no-gutters justify-content-end article-comments-container-parent">
     <div class="article-comments-container">
-        <div class="comments-count">
-            @Model.Comments.Count() COMMENTS
+        <div id="add-comment-form">
+            @Html.Action(nameof(ArticleController.GetArticleComments), "Article")
         </div>
-
-        @*<div class="comments-list-container">
-            {{#each article.comments}}
-            <div class="comments-list-item row no-gutters">
-                <div class="col- comment-item-info">
-                    <div class="comment-item-image-container">
-                        <img class="comment-author-avatar" src="https://newsletter-project.herokuapp.com/api/article/image/{{this.authorAvatar}}">
-                        <div class="comment-date">
-                            <span>{{this.date.month}}</span>
-                            <span>{{this.date.day}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col- comment-item-contnet-container">
-                    <h4>{{this.author}}</h4>
-                    <div class="comment-item-content">
-                        {{this.content}}
-                    </div>
-                </div>
-
-                <input type="button" class="reply-comment-button add-comment-toggler hidden" value="REPLY">
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <div class="add-comment-container add-comment-toggler">
+                @Html.Action(nameof(ArticleController.AddCommentToArtile), "Article")
             </div>
-            <div class="reply-comment-container add-comment-toggler hidden" style="display: none;">
-                <div>REPLY</div>
-
-                <div class="rc-custom-form">
-                    <textarea name="content" rows="4"></textarea>
-                    <div>
-                        <input type="button" value="SUBMIT" class="custom-form-submit" data-id="{{this._id}}">
-                    </div>
-                </div>
-            </div>
-
-            {{#each replies}}
-            <div class="replied-comments-list-item row no-gutters">
-                <div class="col- replied-comment-item-info">
-                    <div class="replied-comment-item-image-container">
-                        <img class="comment-author-avatar" src="https://newsletter-project.herokuapp.com/api/article/image/{{this.authorAvatar}}">
-                        <div class="comment-date">
-                            <span>{{this.date.month}}</span>
-                            <span>{{this.date.day}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col- replied-comment-item-contnet-container">
-                    <h4>{{this.author}}</h4>
-                    <div class="replied-comment-item-content">
-                        {{this.content}}
-                    </div>
-                </div>
-            </div>
-            {{/each}} {{/each}}
-        </div>
-        <div class="add-comment-container add-comment-toggler hidden">
-            <div>LEAVE A COMMENT</div>
-            <div class="rc-custom-form">
-                <textarea name="content" id="comment-box" rows="8"></textarea>
-                <div>
-                    <input type="button" id="submit-comment" value="SUBMIT">
-                </div>
-            </div>
-        </div>*@
+        }
     </div>
+
 </div>
 
 @section Scripts {
     <script src="/Scripts/single-article.js"></script>
-
 }

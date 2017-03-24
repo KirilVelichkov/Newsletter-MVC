@@ -14,7 +14,7 @@ namespace NewsLetter.Services.Data.Services
 
         protected BaseDataService(Func<IUnitOfWork> unitOfWork)
         {
-            Guard.WhenArgument(unitOfWork, nameof(Func<IUnitOfWork>)).IsNull().Throw();
+            Guard.WhenArgument(unitOfWork, nameof(unitOfWork)).IsNull().Throw();
 
             this.unitOfWork = unitOfWork;
         }

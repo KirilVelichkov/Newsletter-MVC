@@ -20,7 +20,33 @@ namespace NewsLetter.Models.DbModels
             this.commentReplies = new HashSet<CommentReply>();
         }
 
-        public string AvatarPictureUrl { get; set; } = "TODO";
+        public override string Id
+        {
+            get
+            {
+                return base.Id;
+            }
+
+            set
+            {
+                base.Id = value;
+            }
+        }
+
+        public override string UserName
+        {
+            get
+            {
+                return base.UserName;
+            }
+
+            set
+            {
+                base.UserName = value;
+            }
+        }
+
+        public string AvatarPictureUrl { get; set; }
 
         public virtual ICollection<Comment> Comments {
             get { return this.comments; }

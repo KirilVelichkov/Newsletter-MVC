@@ -13,17 +13,19 @@ namespace NewsLetter.MVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //       name: "Home",
+            //       url: "{controller}/{action}/{pageNumber}/{pageSize}",
+            //       defaults: new { controller = "Home", action = "Index", pageNumber = 1, pageSize = 5 }
+            //);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-              name: "Category route",
-              url: "{controller}/{action}/{id}",
-              defaults: new { controller = "Category", action = "", id = UrlParameter.Optional }
-          );
+
         }
     }
 }

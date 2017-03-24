@@ -11,12 +11,10 @@ namespace NewsLetter.Models.DbModels
     public class Comment
     {
         private ICollection<CommentReply> replies;
-        private ICollection<Article> articles;
 
         public Comment()
         {
             this.replies = new HashSet<CommentReply>();
-            this.articles = new HashSet<Article>();
         }
 
         public int Id { get; set; }
@@ -37,10 +35,9 @@ namespace NewsLetter.Models.DbModels
             set { this.replies = value; }
         }
 
-        public virtual ICollection<Article> Articles
-        {
-            get { return this.articles; }
-            set { this.articles = value; }
-        }
+        [ForeignKey("Article")]
+        public int ArticleId { get; set; }
+
+        public virtual Article Article { get; set; }
     }
 }

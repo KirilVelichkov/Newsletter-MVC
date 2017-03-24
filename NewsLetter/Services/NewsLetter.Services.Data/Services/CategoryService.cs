@@ -31,7 +31,7 @@ namespace NewsLetter.Services.Data.Services
 
         public IEnumerable<ListArticleByCategoryViewModel> GetArticleByCategory(string category)
         {
-            return this.articleRepository.GetAllMapped<ListArticleByCategoryViewModel>();
+            return this.articleRepository.GetAllMapped<ListArticleByCategoryViewModel>(x=>x.Category.Name.ToLower() == category.ToLower());
         }
 
         public IEnumerable<CategoryViewModel> GetAllCategories()

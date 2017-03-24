@@ -1,0 +1,14 @@
+﻿@using (Ajax.BeginForm(nameof(ArticleController.AddCommentToArtile),
+                "Article",
+                new { articleId = this.Request.Url.Segments[3] },
+                new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "add-comment-form", OnComplete = "clearForm" })
+                )
+{
+    <div>LEAVE A COMMENT</div>
+    <div class="rc-custom-form">
+        <textarea name="content" id="comment-box" rows="8"></textarea>
+        <div>
+            <input type="submit" id="submit-comment" value="SUBMIT">
+        </div>
+    </div>
+}

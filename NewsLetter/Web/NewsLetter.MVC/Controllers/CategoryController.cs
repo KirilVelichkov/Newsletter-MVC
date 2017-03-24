@@ -21,14 +21,27 @@ namespace NewsLetter.MVC.Controllers
             this.categoryService = categoryService;
         }
 
-        public ActionResult Index(string category)
+        public ActionResult Index(string category, int pageNumber, int pageSize)
         {
+            var skip = (pageNumber - 1) * pageSize;
+            var Take = pageSize;
+
             var articlesByCategory = this.categoryService.GetArticleByCategory(category);
+            var articlesCount = articlesByCategory.Count() / pageSize;
+            var pagedArticles = articlesByCategory.Skip(skip).Take(Take);
+
+            if (articlesCount < 1)
+            {
+                articlesCount = 1;
+            }
 
             var ArticlesByCategoryViewModel = new ArticleAndCategoryViewModel()
             {
-                ArticlesByCategory = articlesByCategory,
-                CategoryName = category
+                ArticlesByCategory = pagedArticles,
+                CategoryName = category,
+                ArticlesCount = articlesCount,
+                pageNumber = pageNumber,
+                pageSize = pageSize
             };
 
             return View(ArticlesByCategoryViewModel);

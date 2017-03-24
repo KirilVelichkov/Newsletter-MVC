@@ -42,6 +42,50 @@
         }
 
         <div class="tab-content all-articles-container hidden" id="articles">
+            <div class="edit-article-container">
+                <div class="form-updated hidden">UPDATED</div>
+                <form class="edit-article-form" ">
+                    <div class="row">
+
+                        <div>
+                            <img src="https://newsletter-project.herokuapp.com/api/article/image/{{image}}" class="actual-article-image">
+                            <label for="ID" class="btn btn-custom">IMAGE</label>
+                            <input id="ID" type="file" name="image" class="edit-form-file">
+                        </div>
+
+                        <div>
+                            <label>EDIT TITLE</label>
+                            <input type="text" name="title" placeholder="Title" class="edit-form-title custom-form-item" value="">
+                        </div>
+
+                        <div>
+                            <label>EDIT CATEGORY</label>
+                            <select name="category" class="edit-form-category custom-form-item">
+                                <option value="SPORT">Sport</option>
+                                <option value="ENTERTAINMENT">Entertainment</option>
+                                <option value="POLITICS">Politics</option>
+                                <option value="HEALTH">Health</option>
+                                <option value="TECHNOLOGY">Technology</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label>EDIT CONTENT</label>
+                            <textarea name="content" class="edit-form-category custom-form-item"></textarea>
+                        </div>
+
+                        <div>
+                            <label></label>
+                            <input type="submit" value="UPDATE" class="btn btn-success btn-update-article">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script src="~/Scripts/admin-panel.js"></script>
+}

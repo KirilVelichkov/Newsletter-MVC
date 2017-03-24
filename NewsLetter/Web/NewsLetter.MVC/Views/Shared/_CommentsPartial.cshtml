@@ -1,0 +1,78 @@
+﻿@model IEnumerable<CommentViewModel>
+
+<div class="comments-count">
+    @Model.Count() COMMENTS
+</div>
+
+<div class="comments-list-container">
+    @foreach (var comment in Model)
+            {
+        <div class="comments-list-item row no-gutters">
+            <div class="col- comment-item-info">
+                <div class="comment-item-image-container">
+                    <img class="comment-author-avatar" src="@comment.Author.AvatarPictureUrl">
+                    <div class="comment-date">
+                        <span>@comment.CreatedOn.ToString("MMM").Substring(0, 3).ToUpper()</span>
+                        <span>@comment.CreatedOn.Day</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col- comment-item-contnet-container">
+                <h4>@comment.Author.UserName</h4>
+                <div class="comment-item-content">
+                    @comment.Content
+                </div>
+            </div>
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <input type="button" class="reply-comment-button add-comment-toggler" value="REPLY">
+            }
+        </div>
+
+        <div class="reply-comment-container add-comment-toggler hidden">
+            @using (Ajax.BeginForm(nameof(ArticleController.AddCommentReply),
+                    "Article",
+                    new { commentId = comment.Id, articleId = comment.ArticleId },
+                    new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "add-comment-form", OnComplete = "clearForm" })
+            )
+            {
+                <div>REPLY</div>
+
+                <div class="rc-custom-form">
+                    <textarea name="Content" rows="4" class="reply-textarea"></textarea>
+                    <div>
+                        <input type="submit" value="SUBMIT" class="custom-form-submit">
+                    </div>
+                </div>
+            }
+        </div>
+
+        foreach (var reply in comment.Replies)
+        {
+            <div class="replied-comments-list-item row no-gutters">
+                <div class="col- replied-comment-item-info">
+                    <div class="replied-comment-item-image-container">
+                        <img class="comment-author-avatar" src="@reply.Author.AvatarPictureUrl">
+                        <div class="comment-date">
+                            <span>@reply.CreatedOn.ToString("MMM").Substring(0, 3).ToUpper()</span>
+                            <span>@reply.CreatedOn.Day</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col- replied-comment-item-contnet-container">
+                    <h4>@reply.Author.UserName</h4>
+                    <div class="replied-comment-item-content">
+                        @reply.Content
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<script>
+    $('.reply-comment-button').on('click', function () {
+        console.log('here')
+        $('.reply-comment-container').addClass('hidden');
+        $(this).parent('.comments-list-item').next('div.reply-comment-container').removeClass('hidden');
+    });
+</script>

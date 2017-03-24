@@ -60,11 +60,16 @@
   <ItemGroup>
     <Compile Include="Account\LoginViewModel.cs" />
     <Compile Include="Account\RegisterViewModel.cs" />
+    <Compile Include="Articles\AdminViewModel.cs" />
     <Compile Include="Articles\ArticleByCategoryViewModel.cs" />
     <Compile Include="Articles\CategoryViewModel.cs" />
+    <Compile Include="Articles\CommentReplyViewModel.cs" />
+    <Compile Include="Articles\CommentViewModel.cs" />
+    <Compile Include="Articles\HomeArticlesViewModel.cs" />
     <Compile Include="Articles\ListArticleByCategoryViewModel.cs" />
     <Compile Include="Articles\CreateArticleViewModel.cs" />
     <Compile Include="Articles\SingleArticleViewModel.cs" />
+    <Compile Include="Articles\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

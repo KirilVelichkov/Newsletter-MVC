@@ -15,6 +15,7 @@ namespace NewsLetter.MVC.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService adminService;
+        private readonly IArticleService articleService;
         private readonly ICategoryService categoryService;
         private readonly ITagsService tagsService;
         private readonly IMappingProvider mappingProvider;
@@ -22,15 +23,18 @@ namespace NewsLetter.MVC.Controllers
         public AdminController(
                 IAdminService adminService,
                 ICategoryService categoryService,
+                IArticleService articleService,
                 ITagsService tagsService,
                 IMappingProvider mappingProvider)
         {
             Guard.WhenArgument(adminService, nameof(adminService)).IsNull().Throw();
             Guard.WhenArgument(categoryService, nameof(categoryService)).IsNull().Throw();
             Guard.WhenArgument(tagsService, nameof(tagsService)).IsNull().Throw();
+            Guard.WhenArgument(articleService, nameof(articleService)).IsNull().Throw();
 
             this.mappingProvider = mappingProvider;
             this.categoryService = categoryService;
+            this.articleService = articleService;
             this.tagsService = tagsService;
             this.adminService = adminService;
         }
@@ -92,5 +96,6 @@ namespace NewsLetter.MVC.Controllers
             this.adminService.CreateArticle(mappedArticle);
             return this.RedirectToAction("Index");
         }
+
     }
 }

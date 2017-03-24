@@ -49,6 +49,5 @@ namespace NewsLetter.Services.Data.Services
                 uow.Commit();
             }
         }
-
     }
 }

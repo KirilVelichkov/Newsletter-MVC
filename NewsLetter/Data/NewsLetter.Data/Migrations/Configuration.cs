@@ -14,7 +14,6 @@ namespace NewsLetter.Data.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-
         }
 
         protected override void Seed(NewsLetterDBContext context)
@@ -54,7 +53,8 @@ namespace NewsLetter.Data.Migrations
                 var adminUser = new User
                 {
                     UserName = "admin",
-                    Email = "admin@admin.com"
+                    Email = "admin@admin.com",
+                    AvatarPictureUrl = "/Images/Static/admin-avatar.jpg"
                 };
 
                 userManager.Create(adminUser, "admin123");
@@ -67,7 +67,7 @@ namespace NewsLetter.Data.Migrations
             var userStore = new UserStore<User>(context);
             var userManager = new UserManager<User>(userStore);
 
-            var categories = new string[] { "Enterteinment", "Sport", "Politics", "Health", "Technology" };
+            var categories = new string[] { "Entertainment", "Sport", "Politics", "Health", "Technology" };
 
             foreach (var category in categories)
             {

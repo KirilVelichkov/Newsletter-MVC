@@ -14,16 +14,16 @@
             <a href="/article/index/@article.Id">
                 <div class="single-article-image-containter">
                     <div class="single-article-category">
-                        @article.Category
+                        @article.Category.ToUpper()
                     </div>
                     <img class="single-article-image" src="@article.ImageUrl" />
                     <div class="single-article-date">
-                        <span>@article.CreatedOn.ToString("MMMM")</span>
+                        <span>@article.CreatedOn.ToString("MMM").Substring(0, 3).ToUpper()</span>
                         <span>@article.CreatedOn.Day</span>
                     </div>
                 </div>
 
-                <div class="single-article-title">
+                <div class="single-article-title" title="@article.Title">
                     @article.Title
                 </div>
 
@@ -43,14 +43,17 @@
 
 <div class="row pagination-container no-gutters">
     <div class="d-flex justify-content-start" id="previous">
-        <a href="/home/category/?category=@Model.CategoryName&pageNumber=1&pageSize=5">«</a>
+        <a href="/category/?category=@Model.CategoryName&pageNumber=1&pageSize=@Model.pageSize">«</a>
     </div>
 
     <div class="col d-flex justify-content-center pages">
-        <a href="/home/category/?category=@Model.CategoryName&pageNumber=1&pageSize=5">1</a>
+        @for (int i = 1; i <= Model.ArticlesCount; i++)
+        {
+            <a href="/category/?category=@Model.CategoryName&pageNumber=@i&pageSize=@Model.pageSize">@i</a>
+        }
     </div>
 
     <div class="d-flex justify-content-end" id="next">
-        <a href="/home/category/?category=@Model.CategoryName&pageNumber=1&pageSize=5">»</a>
+        <a href="/category/?category=@Model.CategoryName&pageNumber=@Model.ArticlesCount&pageSize=@Model.pageSize">»</a>
     </div>
 </div>

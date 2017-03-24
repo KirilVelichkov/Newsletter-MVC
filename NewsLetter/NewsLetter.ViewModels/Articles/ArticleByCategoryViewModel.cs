@@ -11,5 +11,11 @@ namespace NewsLetter.ViewModels.Articles
         public IEnumerable<ListArticleByCategoryViewModel> ArticlesByCategory { get; set; }
 
         public string CategoryName { get; set; }
+
+        public int ArticlesCount { get; set; }
+
+        public int pageNumber { get; set; }
+
+        public int pageSize { get; set; }
     }
 }

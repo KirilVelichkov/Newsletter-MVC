@@ -19,7 +19,7 @@
 <body>
     <header>
         <div class="logo-holder">
-            <a href="#"><img src="../../Images/Static/logo.png" /></a>
+            <a href="/home?pageNumber=1&pageSize=5"><img src="../../Images/Static/logo.png" /></a>
         </div>
         <nav class="navbar navbar-toggleable-lg navbar-light bg-faded">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link nav-link-active" href="home?pageNumber=1&pageSize=5">HOME</a>
+                        <a class="nav-link nav-link-active" href="/home?pageNumber=1&pageSize=5">HOME</a>
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("ENTERTAINMENT", nameof(CategoryController.Index), "Category", new { category = "entertainment", pageNumber = 1, pageSize = 5 }, new { @class = "nav-link" })
@@ -89,8 +89,8 @@
         </footer>
     </main>
 
-    @*@Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")*@
+   @Scripts.Render("~/bundles/jquery")
+        @*@Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>
