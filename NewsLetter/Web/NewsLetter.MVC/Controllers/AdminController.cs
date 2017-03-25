@@ -22,8 +22,8 @@ namespace NewsLetter.MVC.Controllers
 
         public AdminController(
                 IAdminService adminService,
-                ICategoryService categoryService,
                 IArticleService articleService,
+                ICategoryService categoryService,
                 ITagsService tagsService,
                 IMappingProvider mappingProvider)
         {
@@ -31,6 +31,7 @@ namespace NewsLetter.MVC.Controllers
             Guard.WhenArgument(categoryService, nameof(categoryService)).IsNull().Throw();
             Guard.WhenArgument(tagsService, nameof(tagsService)).IsNull().Throw();
             Guard.WhenArgument(articleService, nameof(articleService)).IsNull().Throw();
+            Guard.WhenArgument(mappingProvider, nameof(mappingProvider)).IsNull().Throw();
 
             this.mappingProvider = mappingProvider;
             this.categoryService = categoryService;
@@ -47,10 +48,10 @@ namespace NewsLetter.MVC.Controllers
             return View(model);
         }
 
-        public ActionResult CreateArticle()
-        {
-            return View();
-        }
+        //public ActionResult CreateArticle()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -96,6 +97,5 @@ namespace NewsLetter.MVC.Controllers
             this.adminService.CreateArticle(mappedArticle);
             return this.RedirectToAction("Index");
         }
-
     }
 }

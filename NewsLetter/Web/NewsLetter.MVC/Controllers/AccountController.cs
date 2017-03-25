@@ -13,6 +13,7 @@ using NewsLetter.Auth.Identity.Managers;
 using NewsLetter.ViewModels.Account;
 using System.IO;
 using NewsLetter.Auth.Identity.Contracts;
+using Bytes2you.Validation;
 
 namespace NewsLetter.MVC.Controllers
 {
@@ -23,16 +24,15 @@ namespace NewsLetter.MVC.Controllers
 
         public AccountController(IAuthService authService)
         {
+            Guard.WhenArgument(authService, nameof(authService)).IsNull().Throw();
             this.authService = authService;
         }
-
 
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 

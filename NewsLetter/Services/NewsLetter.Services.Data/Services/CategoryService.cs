@@ -19,8 +19,7 @@ namespace NewsLetter.Services.Data.Services
         public CategoryService(
             IEfMappingRepository<Article> articleRepository,
             IEfMappingRepository<Category> categoryRepository,
-            Func<IUnitOfWork> unitOfWork)
-            : base(unitOfWork)
+            Func<IUnitOfWork> unitOfWork) : base(unitOfWork)
         {
             Guard.WhenArgument(articleRepository, nameof(articleRepository)).IsNull().Throw();
             Guard.WhenArgument(categoryRepository, nameof(categoryRepository)).IsNull().Throw();
@@ -31,7 +30,7 @@ namespace NewsLetter.Services.Data.Services
 
         public IEnumerable<ListArticleByCategoryViewModel> GetArticleByCategory(string category)
         {
-            return this.articleRepository.GetAllMapped<ListArticleByCategoryViewModel>(x=>x.Category.Name.ToLower() == category.ToLower());
+            return this.articleRepository.GetAllMapped<ListArticleByCategoryViewModel>(x => x.Category.Name.ToLower() == category.ToLower());
         }
 
         public IEnumerable<CategoryViewModel> GetAllCategories()

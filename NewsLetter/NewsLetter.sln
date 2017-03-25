@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsLetter.Services.Data.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsLetter.CoverAlls", "NewsLetter.CoverAlls\NewsLetter.CoverAlls.csproj", "{C07BC2B6-7B99-4BEB-8C87-0ED03981FE5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsLetter.MVC.Controllers.Tests", "Tests\NewsLetter.MVC.Controllers.Tests\NewsLetter.MVC.Controllers.Tests.csproj", "{005C4106-31A3-448F-B7BB-48F7B3DA4044}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{C07BC2B6-7B99-4BEB-8C87-0ED03981FE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C07BC2B6-7B99-4BEB-8C87-0ED03981FE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C07BC2B6-7B99-4BEB-8C87-0ED03981FE5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{005C4106-31A3-448F-B7BB-48F7B3DA4044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{005C4106-31A3-448F-B7BB-48F7B3DA4044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{005C4106-31A3-448F-B7BB-48F7B3DA4044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{005C4106-31A3-448F-B7BB-48F7B3DA4044}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,5 +91,6 @@ Global
 		{ABFADDED-D7D5-472C-BFBD-120793D2D02A} = {516EC1A8-FB4F-455C-AEE7-DB2710BE2DA4}
 		{05411C06-4862-417C-B40F-A8500261293A} = {737FA127-3FF1-4C09-8966-0FF0675C1141}
 		{C07BC2B6-7B99-4BEB-8C87-0ED03981FE5A} = {C63B4C9C-2D46-42FB-80C7-8CA6E32A02FA}
+		{005C4106-31A3-448F-B7BB-48F7B3DA4044} = {737FA127-3FF1-4C09-8966-0FF0675C1141}
 	EndGlobalSection
 EndGlobal
