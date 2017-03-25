@@ -130,6 +130,10 @@
     <Compile Include="ArticleControllerTests\Constructor_Should.cs" />
     <Compile Include="ArticleControllerTests\GetArticleComments_Should.cs" />
     <Compile Include="ArticleControllerTests\Index_Should.cs" />
+    <Compile Include="CategoryControllerTests\Constructor_Should.cs" />
+    <Compile Include="CategoryControllerTests\Index_Should.cs" />
+    <Compile Include="HomeControllerTests\Constructor_Should.cs" />
+    <Compile Include="HomeControllerTests\Index_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
